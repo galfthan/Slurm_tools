@@ -18,7 +18,7 @@ my_awk=$prefix/awk
 # Job grace time (seconds) before we may flag the node
 export jobgracetime=300
 # Global configuration file for pestat
-export PESTAT_GLOBAL_CONFIG=/etc/pestat.conf
+export PESTAT_GLOBAL_CONFIG=/projappl/project_2001659/alfthan/Slurm_tools/pestat/pestat.conf
 # Per-user configuration file for pestat
 export PESTAT_CONFIG=$HOME/.pestat.conf
 # Omit nodes with these states (list separated by spaces):
@@ -624,9 +624,10 @@ BEGIN {
 			listnode++
 		} else if (state == "mix" && multinodejobs[node] > 0) {
 			# Flag multi-node jobs running on nodes in state==mixed (possibly incorrect node utilization)
-			jobflag="*"
-			jobcolor=MAGENTA
-			listnode++
+			# Not relevant for Puhti.csc.fi, disabling
+			#jobflag="*"
+			#jobcolor=MAGENTA
+			#listnode++
 		} else {
 			jobflag=" "
 			jobcolor=NORMAL
