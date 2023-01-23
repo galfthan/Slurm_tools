@@ -39,6 +39,7 @@ where:
 	-p partition: Select only partion <partition>
         -P: Include all partitions, including hidden and unavailable ones
 	-u username: Print only jobs of a single user <username> 
+	-U Include all users
 	-g groupname: Print only users in UNIX group <groupname>
 	-A accountname: Print only jobs in Slurm account <accountname>
 	-a: Print User(Account) information after each JobID
@@ -146,7 +147,7 @@ fi
 # Parse command options
 #
 
-while getopts "p:Pu:g:A:q:s:t:n:j:w:m:M:R:aCcdhVFf12SETNG" options; do
+while getopts "p:Pu:Ug:A:q:s:t:n:j:w:m:M:R:aCcdhVFf12SETNG" options; do
 	case $options in
 		p )	export partition="-p $OPTARG"
 			echo Print only nodes in partition $OPTARG
@@ -167,6 +168,8 @@ while getopts "p:Pu:g:A:q:s:t:n:j:w:m:M:R:aCcdhVFf12SETNG" options; do
 				# An incorrectly configured Slurm database may not contain user associations
 				echo "Warning: No Slurm association found in the database for username $username"
 			fi
+			;;
+		U )	unset username
 			;;
 		g )	export groupname="$OPTARG"
 			if test "`getent group $OPTARG`"
